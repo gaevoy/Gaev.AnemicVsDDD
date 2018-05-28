@@ -6,16 +6,13 @@ using Xunit;
 
 namespace Gaev.AnemicVsDDD.Tests.Anemic
 {
-    public class CustomerRepositoryTests
+    public class CustomerRepositoryTests : TestBase
     {
-        private readonly TestConfig _config = new TestConfig();
-        private static readonly Random Random = new Random();
-
         [Fact]
         public void It_should_insert()
         {
             // Given
-            var repo = new CustomerRepository(_config.ConnectionString);
+            var repo = new CustomerRepository(Config.ConnectionString);
             var customer = RandomCustomer();
 
             // When
@@ -30,7 +27,7 @@ namespace Gaev.AnemicVsDDD.Tests.Anemic
         public void It_should_update()
         {
             // Given
-            var repo = new CustomerRepository(_config.ConnectionString);
+            var repo = new CustomerRepository(Config.ConnectionString);
             var customer = RandomCustomer();
             repo.Insert(customer);
 
@@ -73,7 +70,5 @@ namespace Gaev.AnemicVsDDD.Tests.Anemic
                 }
             };
         }
-
-        private static string RandomString() => Guid.NewGuid().ToString();
     }
 }
