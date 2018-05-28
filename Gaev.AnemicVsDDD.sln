@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaev.AnemicVsDDD", "Gaev.AnemicVsDDD\Gaev.AnemicVsDDD.csproj", "{97146032-DE98-4D19-9B78-D0D36693F7A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaev.AnemicVsDDD.Tests", "Gaev.AnemicVsDDD.Tests\Gaev.AnemicVsDDD.Tests.csproj", "{211E7D5A-B0EB-40F9-97B7-E79DAB4E73D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97146032-DE98-4D19-9B78-D0D36693F7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97146032-DE98-4D19-9B78-D0D36693F7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97146032-DE98-4D19-9B78-D0D36693F7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97146032-DE98-4D19-9B78-D0D36693F7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{211E7D5A-B0EB-40F9-97B7-E79DAB4E73D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{211E7D5A-B0EB-40F9-97B7-E79DAB4E73D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{211E7D5A-B0EB-40F9-97B7-E79DAB4E73D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{211E7D5A-B0EB-40F9-97B7-E79DAB4E73D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
