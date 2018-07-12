@@ -9,5 +9,6 @@ namespace Gaev.AnemicVsDDD.Anemic
         public List<Order> Orders { get; set; }
         public string Name { get; set; }
         public decimal Funds { get; set; }
+        public bool IsNew = true;
     }
 }

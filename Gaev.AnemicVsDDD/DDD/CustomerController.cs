@@ -14,7 +14,7 @@ namespace Gaev.AnemicVsDDD.DDD
         public Guid RegisterCustomer(string name, decimal funds)
         {
             var customer = new Customer(name, funds);
-            _repo.Insert(customer);
+            _repo.Save(customer);
             return customer.Id;
         }
 
@@ -22,15 +22,16 @@ namespace Gaev.AnemicVsDDD.DDD
         {
             var customer = _repo.Load(customerId);
             var order = customer.Order(items);
-            _repo.Update(customer);
+            _repo.Save(customer);
             return order.Id;
         }
 
         public void CancelOrder(Guid customerId, Guid orderId)
         {
             var customer = _repo.Load(customerId);
-            customer.CancelOrder(customer.Orders.Find(e => e.Id == orderId));
-            _repo.Update(customer);
+            var order = customer.FindOrder(orderId);
+            customer.CancelOrder(order);
+            _repo.Save(customer);
         }
     }
 }

@@ -14,10 +14,17 @@ namespace Gaev.AnemicVsDDD.DDD
             Funds = funds;
         }
 
-        public Guid Id { get; }
-        public List<Order> Orders { get; }
-        public string Name { get; }
+
+        public Guid Id { get; private set; }
+        public List<Order> Orders { get; private set; }
+        public string Name { get; private set; }
         public decimal Funds { get; private set; }
+        internal bool IsNew = true;
+
+        public Order FindOrder(Guid orderId)
+        {
+            return Orders.Find(e => e.Id == orderId);
+        }
 
         public Order Order(params OrderItem[] items)
         {
@@ -25,7 +32,7 @@ namespace Gaev.AnemicVsDDD.DDD
                 throw new Exception("Insufficient funds");
             var order = new Order(this, items);
             Orders.Add(order);
-            Funds -= items.Sum(e => e.Cost);
+            Funds -= order.TotalCost;
             return order;
         }
 
@@ -34,7 +41,12 @@ namespace Gaev.AnemicVsDDD.DDD
             if (order == null || !Orders.Contains(order))
                 throw new Exception("Order is not found");
             Orders.Remove(order);
-            Funds += order.Items.Sum(e => e.Cost);
+            Funds += order.TotalCost;
+        }
+
+        private Customer()
+        {
+            //EF requires that a parameterless constructor be declared
         }
     }
 }

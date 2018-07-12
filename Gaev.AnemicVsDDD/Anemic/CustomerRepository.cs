@@ -16,37 +16,44 @@ namespace Gaev.AnemicVsDDD.Anemic
         public Customer Load(Guid id)
         {
             using (var session = new DbSession(_connectionString))
-                return session.Customers
+            {
+                var customer = session.Customers
                     .Include(e => e.Orders)
                     .ThenInclude(e => e.Items)
                     .FirstOrDefault(e => e.Id == id);
-        }
-
-        public void Insert(Customer customer)
-        {
-            using (var session = new DbSession(_connectionString))
-            {
-                session.Customers.Add(customer);
-                session.SaveChanges();
+                MarkAsSaved(customer);
+                return customer;
             }
         }
 
-        public void Update(Customer customer)
+        public void Save(Customer customer)
         {
             using (var session = new DbSession(_connectionString))
             {
-                session.Entry(customer).State = EntityState.Modified;
+                session.Entry(customer).State = customer.IsNew ? EntityState.Added : EntityState.Modified;
                 foreach (var order in customer.Orders)
                 {
-                    session.Entry(order).State = EntityState.Modified;
+                    session.Entry(order).State = order.IsNew ? EntityState.Added : EntityState.Modified;
                     foreach (var item in order.Items)
-                        session.Entry(item).State = EntityState.Modified;
+                        session.Entry(item).State = item.IsNew ? EntityState.Added : EntityState.Modified;
                 }
 
                 session.SaveChanges();
+                MarkAsSaved(customer);
             }
         }
 
+        private static void MarkAsSaved(Customer customer)
+        {
+            if (customer == null) return;
+            customer.IsNew = false;
+            foreach (var order in customer.Orders)
+            {
+                order.IsNew = false;
+                foreach (var item in order.Items)
+                    item.IsNew = false;
+            }
+        }
 
         class DbSession : DbContext
         {

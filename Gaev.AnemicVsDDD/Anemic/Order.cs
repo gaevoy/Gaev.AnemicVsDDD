@@ -9,5 +9,6 @@ namespace Gaev.AnemicVsDDD.Anemic
         public List<OrderItem> Items { get; set; }
         public Customer Customer { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
+        public bool IsNew = true;
     }
 }

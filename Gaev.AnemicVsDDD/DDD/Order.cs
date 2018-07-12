@@ -14,9 +14,16 @@ namespace Gaev.AnemicVsDDD.DDD
             Items = items.ToList();
         }
 
-        public Guid Id { get; }
-        public List<OrderItem> Items { get; }
-        public Customer Customer { get; }
-        public DateTimeOffset CreatedAt { get; }
+        public Guid Id { get; private set; }
+        public List<OrderItem> Items { get; private set; }
+        public Customer Customer { get; private set; }
+        public DateTimeOffset CreatedAt { get; private set; }
+        public decimal TotalCost => Items.Sum(e => e.Cost);
+        internal bool IsNew = true;
+
+        private Order()
+        {
+            //EF requires that a parameterless constructor be declared
+        }
     }
 }

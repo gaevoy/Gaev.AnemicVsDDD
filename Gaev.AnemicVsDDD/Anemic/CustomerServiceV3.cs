@@ -22,7 +22,7 @@ namespace Gaev.AnemicVsDDD.Anemic
                 Name = name,
                 Funds = funds
             };
-            _repo.Insert(customer);
+            _repo.Save(customer);
             return customer;
         }
 
@@ -39,7 +39,7 @@ namespace Gaev.AnemicVsDDD.Anemic
             };
             customer.Orders.Add(order);
             customer.Funds -= items.Sum(e => e.Cost);
-            _repo.Update(customer);
+            _repo.Save(customer);
             return order;
         }
 
@@ -51,7 +51,7 @@ namespace Gaev.AnemicVsDDD.Anemic
                 throw new Exception("Order is not found");
             customer.Orders.Remove(order);
             customer.Funds += order.Items.Sum(e => e.Cost);
-            _repo.Update(customer);
+            _repo.Save(customer);
         }
     }
 }
